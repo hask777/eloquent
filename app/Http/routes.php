@@ -61,3 +61,29 @@ Route::get('/findWhere', function(){
     return $posts;
      
 });
+
+// Saving
+
+Route::get('/save', function(){
+
+    $post = new Post(); 
+
+    $post->title = "new Orm title";
+    $post->content = "new Orm title";
+ 
+    $post->save();
+     
+});
+
+// Update
+
+Route::get('/update', function(){
+
+    $post = Post::find(5); /* take the id of post */
+
+    $post->title = "new Orm title update";
+    $post->content = "new Orm content update";
+ 
+    $post->save();
+     
+});
