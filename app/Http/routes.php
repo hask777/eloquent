@@ -77,7 +77,7 @@ Route::get('/save', function(){
 
 // Update
 
-Route::get('/update', function(){
+Route::get('/updating', function(){
 
     $post = Post::find(5); /* take the id of post */
 
@@ -95,6 +95,17 @@ Route::get('/create', function(){
     $post = Post::create([
         'title' => 'the create method two',
         'content' => 'WOW i am learning a lot two'
+    ]);
+     
+});
+
+// Update
+
+Route::get('/update', function(){
+
+    $post = Post::where('id', 2)->where('is_admin', 0)->update([
+        'title' => 'updated title',
+        'content' => 'updated content'
     ]);
      
 });

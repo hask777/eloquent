@@ -16,6 +16,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('content');
+            $table->boolean('is_admin')->default(0);
             $table->timestamps();
         });
     }
