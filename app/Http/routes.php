@@ -23,8 +23,11 @@ Route::get('/insert', function(){
     DB::insert('insert into posts(title, content) values(?,?)', ['PHP with Laravel', 'Laravel is the best thing that has happened to PHP']);
 });
 
-// Eloquent
+/*
+ *   ELOQUENT ORM
+ */
 
+// Eloquent
 Route::get('/read', function(){
 
     // $posts = new Post([
@@ -42,7 +45,6 @@ Route::get('/read', function(){
 });
 
 //  Return a Html just one item.
-
 Route::get('/find', function(){
 
     $post = Post::find(1);
@@ -52,7 +54,6 @@ Route::get('/find', function(){
 });
 
 //  Return an Object just one item
-
 Route::get('/findWhere', function(){
 
     $posts = Post::where('id',[2])->orderBy('id', 'desc')->take(1)->get();
@@ -63,7 +64,6 @@ Route::get('/findWhere', function(){
 });
 
 // Saving
-
 Route::get('/save', function(){
 
     $post = new Post(); 
@@ -76,7 +76,6 @@ Route::get('/save', function(){
 });
 
 // Update
-
 Route::get('/updating', function(){
 
     $post = Post::find(5); /* take the id of post */
@@ -89,7 +88,6 @@ Route::get('/updating', function(){
 });
 
 // Create
-
 Route::get('/create', function(){
 
     $post = Post::create([
@@ -100,7 +98,6 @@ Route::get('/create', function(){
 });
 
 // Update
-
 Route::get('/update', function(){
 
     $post = Post::where('id', 2)->where('is_admin', 0)->update([
@@ -108,4 +105,22 @@ Route::get('/update', function(){
         'content' => 'updated content'
     ]);
      
+});
+
+// Deleting
+Route::get('/delete', function(){
+
+    $post = Post::find(1);
+
+    $post->delete();
+     
+});
+
+// Muliple deleting
+Route::get('/delete2', function(){
+
+    $post = Post::destroy([4,5]); /* Can get an array of items */
+
+    $post = Post::where('is_admin', 1)->delete();
+
 });
