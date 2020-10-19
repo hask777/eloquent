@@ -87,3 +87,14 @@ Route::get('/update', function(){
     $post->save();
      
 });
+
+// Create
+
+Route::get('/create', function(){
+
+    $post = Post::create([
+        'title' => 'the create method two',
+        'content' => 'WOW i am learning a lot two'
+    ]);
+     
+});
