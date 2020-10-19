@@ -1,5 +1,7 @@
 <?php
 
+use App\Post;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -13,4 +15,28 @@
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/read', function(){
+
+    // $posts = new Post([
+    //     'title' => 'First title',
+    //     'content' => "First contnet"
+    // ]);
+    // $posts->save();
+
+    $posts = Post::all();
+
+    foreach($posts as $post){
+        return $post->title . '<br>' . $post->content;
+    }
+    
+});
+
+Route::get('/find', function(){
+
+    $post = Post::find(1);
+ 
+    return $post->title . '<br>' . $post->content;
+     
 });
