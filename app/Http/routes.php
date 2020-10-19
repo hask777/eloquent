@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Raw SQL Insert
+
+Route::get('/insert', function(){
+    DB::insert('insert into posts(title, content) values(?,?)', ['PHP with Laravel', 'Laravel is the best thing that has happened to PHP']);
+});
+
+// Eloquent
+
 Route::get('/read', function(){
 
     // $posts = new Post([
@@ -33,10 +41,23 @@ Route::get('/read', function(){
     
 });
 
+//  Return a Html just one item.
+
 Route::get('/find', function(){
 
     $post = Post::find(1);
  
     return $post->title . '<br>' . $post->content;
+     
+});
+
+//  Return an Object just one item
+
+Route::get('/findWhere', function(){
+
+    $posts = Post::where('id',[2])->orderBy('id', 'desc')->take(1)->get();
+
+    
+    return $posts;
      
 });
