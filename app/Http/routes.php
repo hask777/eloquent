@@ -17,10 +17,36 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Raw SQL Insert
+/*
+ *   RAW SQL
+ */
 
-Route::get('/insert', function(){
+// Raw SQL Insert
+Route::get('/rawinsert', function(){
     DB::insert('insert into posts(title, content) values(?,?)', ['PHP with Laravel', 'Laravel is the best thing that has happened to PHP']);
+});
+
+// Raw SQL Read
+Route::get('/rawread', function(){
+    $results = DB::select('select * from posts where id = ?', [3]);
+
+    foreach($results as $result){
+        return $result->title;
+    }
+});
+
+// Raw SQL Read
+Route::get('/rawupdate', function(){
+    $results = DB::update('update posts set title = "update title" where id = ?', [3]);
+
+    return $results;    
+});
+
+// Raw SQL Delete
+Route::get('/rawdelete', function(){
+    $results = DB::delete('delete from posts where id = ?', [3]);
+
+    return $results;    
 });
 
 /*
