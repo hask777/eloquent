@@ -124,3 +124,27 @@ Route::get('/delete2', function(){
     $post = Post::where('is_admin', 1)->delete();
 
 });
+
+// Soft delete
+Route::get('/softdelete', function(){
+
+    $post = Post::find(1)->delete(); 
+});
+
+// Read Soft delete
+Route::get('/readsoftdelete', function(){
+
+    // $post = Post::withTrashed()->where('id', 1)->get();
+    $post = Post::onlyTrashed()->where('id', 1)->get();
+    return $post;
+});
+
+// Restore deleted item 
+Route::get('/restore', function(){
+    Post::withTrashed()->where('is_admin', 0)->restore();
+});
+
+// Restore deleted item 
+Route::get('/forcedelete', function(){
+    Post::onlyTrashed()->where('is_admin', 0)->forceDelete();
+});
